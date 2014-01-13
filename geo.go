@@ -25,3 +25,14 @@ func HandleWithSQL() (*SQLMapper, error) {
 
 	return nil, sqlConfErr
 }
+
+func HandleWithSQLDb(database *sql.DB) (*SQLMapper, error) {
+	sqlConf, sqlConfErr := GetSQLConf()
+	if sqlConfErr == nil {
+		s := &SQLMapper{conf: sqlConf}
+		s.sqlConn = database
+		return s, nil
+	}
+
+	return nil, sqlConfErr
+}
